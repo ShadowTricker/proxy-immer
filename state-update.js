@@ -42,10 +42,27 @@ this.store.update(state => {
 const stateCopy = cloneSimple(stateObj);
 stateCopy.address.zipcode = '111111',
 stateCopy.address.detail.unit = '3';
-console.log(stateCopy);
-console.log(stateObj);
-console.assert(stateCopy.hobbies !== stateObj.hobbies, 'Not Equal');
+console.log(stateCopy.hobbies === stateObj.hobbies);  // false
 
 function cloneSimple(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
+
+const spreadNewState = {
+  ...stateObj,
+  address: {
+    ...stateObj.address,
+    zipcode: '111111',
+    detail: {
+      ...stateObj.address.detail,
+      unit: '3'
+    }
+  }
+};
+console.log(spreadNewState.hobbies === stateObj.hobbies);  // true
+
+const immerNewState = produceFn(stateObj, draft => {
+  draft.address.zipcode = '111111',
+  draft.address.detail.unit = '3';
+});
+console.log(immerNewState.hobbies ===stateObj.hobbies);  // true

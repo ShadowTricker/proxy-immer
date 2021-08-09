@@ -12,7 +12,7 @@ const state = {
 };
 
 const newState = produceFn(state, draft => {
-  draft.age = 30;
+  draft.age = 28;
   draft.test = '2222';
   draft.name.lastName = '3333';
 });
@@ -25,9 +25,10 @@ function produceFn(baseState, updateFn) {
   let copy;
   const handler = {
     set(target, prop, value) {
-      if (!copy && target[prop] !== value) {
-        console.log(prop);
+      if (!copy) {
         copy = shallowCopy(target);
+      }
+      if (target[prop] !== value) {
         return Reflect.set(copy, prop, value);
       }
       return true;

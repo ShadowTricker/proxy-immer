@@ -18,7 +18,7 @@ function createNegativeArray(array) {
   });
 }
 
-const array = Array.from({ length: 3 }, (v, i) => (i + ''));
+const array = Array.from({ length: 3 }, (v, i) => `${i}`);
 console.log(array);
 const negaArray = createNegativeArray(array);
 console.log(negaArray[-3]);
