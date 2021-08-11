@@ -7,6 +7,7 @@ const user = {
 function createLogProxy(obj) {
   return new Proxy(obj, {
     get(target, key) {
+      console.log('Log Proxy');
       console.log(`Data[${ key }] get!`);
       return Reflect.get(target, key);
     },
@@ -20,6 +21,7 @@ function createLogProxy(obj) {
 function createHiddenProxy(obj, keysExclude) {
   return new Proxy(obj, {
     get(target, key) {
+      console.log('Hidden Proxy');
       if (keysExclude.includes(key)) {
         return `There is no property named [${ key }]!`;
       }
@@ -31,6 +33,7 @@ function createHiddenProxy(obj, keysExclude) {
 function createValidationProxy(obj, validationMap) {
   return new Proxy(obj, {
     set(target, key, value) {
+      console.log('Valid Proxy');
       const valid = validationMap[key] ? validationMap[key](value) : null;
       if (typeof valid === 'boolean') {
         return valid;
@@ -47,7 +50,7 @@ const validProxy = createValidationProxy(loggerProxy, {
   age: v => {
     if (typeof v !== 'number') {
       // return false;
-      throw TypeError(`Age must set to a number!`);
+      throw TypeError(`Age must set a number!`);
     }
     return null;
   }

@@ -15,6 +15,8 @@ const newState = produceFn(state, draft => {
   draft.age = 28;
   draft.test = '2222';
   draft.name.lastName = '333333';
+  draft.name.lastName = '111111';
+  draft.name.firstName = '111222';
 });
 console.log(newState);
 console.log(newState.name === state.name);
@@ -28,9 +30,9 @@ function produceFn(baseState, updateFn) {
       return new Proxy(target[prop], handler);
     },
     set(target, prop, value) {
+      console.log(prop);
       if (target[prop] !== value) {
-        console.log(prop);
-        const copy = shallowCopy(target);
+        const copy = copies.get(target) || shallowCopy(target);
         copy[prop] = value;
         copies.set(target, copy);
       }

@@ -25,10 +25,11 @@ function produceFn(baseState, updateFn) {
   let copy;
   const handler = {
     set(target, prop, value) {
-      if (!copy) {
-        copy = shallowCopy(target);
-      }
+      console.log(prop);
       if (target[prop] !== value) {
+        if (!copy) {
+          copy = shallowCopy(target);
+        }
         return Reflect.set(copy, prop, value);
       }
       return true;
