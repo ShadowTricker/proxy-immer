@@ -17,9 +17,9 @@ const newState = produceFn(state, draft => {
   draft.name.lastName = '3333';
 });
 console.log(newState);
-console.log(newState.name === state.name);
-console.log(newState.phone === state.phone);
-console.log(newState.test === state.test);
+console.log('name: ', newState.name === state.name);
+console.log('phone: ', newState.phone === state.phone);
+console.log('test: ', newState.test === state.test);
 
 
 function produceFn(baseState, updateFn) {

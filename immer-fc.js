@@ -17,15 +17,15 @@ const newState = produceFn(state, draft => {
   draft.name.lastName = '3333';
 });
 console.log(newState);
-console.log(newState.name === state.name);
-console.log(newState.phone === state.phone);
+console.log('name: ', newState.name === state.name);
+console.log('phone: ', newState.phone === state.phone);
 
 // produce function 1st version
 function produceFn(baseState, updateFn) {
   let copy;
   const handler = {
     set(target, prop, value) {
-      console.log(prop);
+      console.log('changedPropName: ', prop);
       if (target[prop] !== value) {
         if (!copy) {
           copy = shallowCopy(target);

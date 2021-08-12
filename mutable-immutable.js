@@ -18,13 +18,13 @@ obj.a = 3344;
 // mutable
 objRefClone.b = 4433;
 console.table({ obj, objRefClone });
-console.log(obj === objRefClone);
-console.log(obj.c === objRefClone.c);
+console.log('objRefClone', obj === objRefClone);
+console.log('objRefClone', obj.c === objRefClone.c);
 
 
 // immutable
 objImm.b = 4433;
 console.table({ obj, objImm });
-console.log(obj === objImm);
-console.log(obj.c === objImm.c);
+console.log('objImm', obj === objImm);
+console.log('objImm', obj.c === objImm.c);
 

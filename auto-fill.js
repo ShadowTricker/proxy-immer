@@ -10,14 +10,12 @@ function createAutoFillObject(origin) {
   });
 }
 
-const obj = createAutoFillObject({});
+const objProxy = createAutoFillObject({});
 
-obj.test1.test2.test3 = 123;
-console.log(obj);
-obj.test1.test2 = 456;
-console.log(obj);
+objProxy.test1.test2.test3 = 123;
+console.log(objProxy);
 
-/* function changeObjVal (obj, keysStr, value) {
+function changeObjVal (obj, keysStr, value) {
   const keys = keysStr.split('.');
   function test(o, kArray, val) {
     if (kArray.length === 1) {
@@ -34,4 +32,4 @@ console.log(obj);
 
 const obj = {};
 changeObjVal(obj, 'test1.test2.test3', 123);
-console.log(obj); */
+console.log(obj);

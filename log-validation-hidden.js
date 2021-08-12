@@ -7,7 +7,7 @@ const user = {
 function createLogProxy(obj) {
   return new Proxy(obj, {
     get(target, key) {
-      console.log('Log Proxy');
+      // console.log('Log Proxy');
       console.log(`Data[${ key }] get!`);
       return Reflect.get(target, key);
     },
@@ -21,7 +21,7 @@ function createLogProxy(obj) {
 function createHiddenProxy(obj, keysExclude) {
   return new Proxy(obj, {
     get(target, key) {
-      console.log('Hidden Proxy');
+      // console.log('Hidden Proxy');
       if (keysExclude.includes(key)) {
         return `There is no property named [${ key }]!`;
       }
@@ -32,8 +32,11 @@ function createHiddenProxy(obj, keysExclude) {
 
 function createValidationProxy(obj, validationMap) {
   return new Proxy(obj, {
+    get(target, key) {
+      // console.log('Valid Proxy');
+      return Reflect.get(target, key);
+    },
     set(target, key, value) {
-      console.log('Valid Proxy');
       const valid = validationMap[key] ? validationMap[key](value) : null;
       if (typeof valid === 'boolean') {
         return valid;
@@ -61,8 +64,8 @@ console.log(validProxy.age);
 console.log(validProxy.job);
 console.log(user);
 validProxy.name = 'Above the time';
-// validProxy.age = '28';
-validProxy.age = 28;
+validProxy.age = '28';
+// validProxy.age = 28;
 validProxy.job = 'Test Developer';
 console.log(validProxy.name);
 console.log(validProxy.age);
